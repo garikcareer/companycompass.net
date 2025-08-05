@@ -10,7 +10,7 @@
     <!--  TODO add favicon  <link rel="favicon" type="image/x-icon" th:href="@{/resources/images/favicon.png}">">-->
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" th:href="@{/resources/webapp/static/css/company.css}" />
+    <link rel="stylesheet" th:href="@{/static/css/company.css}"/>
 
     <title th:if="${pageTitle == 'Home'}">CompanyCompass</title>
     <title th:unless="${pageTitle == 'Home'}" th:text="'CompanyCompass | ' + ${pageTitle}">CompanyCompass</title>

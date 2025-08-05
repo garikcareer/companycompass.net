@@ -14,6 +14,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import java.util.Properties;
+
 /**
  * JPA Configuration class that provides database connectivity beans and related configurations.
  * This class is responsible for setting up the database connection and related JPA components for
@@ -90,6 +92,12 @@ public class JPAConfig {
     LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
     em.setDataSource(dataSource);
     em.setPackagesToScan("com.example.data.entity");
+    em.setJpaProperties(new Properties() {{
+      put("hibernate.hbm2ddl.auto", "none");
+      put("hibernate.show_sql", "true");
+      put("hibernate.format_sql", "true");
+      put("hibernate.transaction.jta.platform", "org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform");
+    }});
     em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
     return em;
   }
