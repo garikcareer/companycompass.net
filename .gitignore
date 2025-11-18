@@ -5,7 +5,6 @@
 out/
 
 ### Gradle ###
-!gradle/wrapper/gradle-wrapper.jar
 .gradle-cache/
 **/build/
 **/.gradle/
