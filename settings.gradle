@@ -1,5 +1,4 @@
 pluginManagement {
-    includeBuild("build-logic")
     repositories {
         gradlePluginPortal()
     }
@@ -7,14 +6,8 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories {
-        mavenLocal()
         mavenCentral()
     }
 }
 
 rootProject.name = PROJECT_NAME
-
-include 'data'
-include 'common'
-include 'site'
-include 'service'
