@@ -14,7 +14,7 @@
 **CompanyCompass** is a web application for managing a directory of companies. It provides a clean interface to list,
 create, update, and delete company profiles.
 
-This project serves as a practical reference for **Standard Spring Framework 6**. Unlike typical Spring Boot apps, it
+This project serves as a practical reference for Standard Spring Framework 6. Unlike typical Spring Boot apps, it
 demonstrates how to manually configure the core architecture—including the DispatcherServlet, Security chains, and
 Database connections—giving developers a deeper look into how Spring works under the hood.
 
@@ -29,7 +29,7 @@ Database connections—giving developers a deeper look into how Spring works und
 ## Technologies Used
 
 - **Language**: Java 21 (LTS)
-- **Framework**: Spring Framework 6.1 (Spring MVC, Spring Data JPA)
+- **Framework**: Spring Framework 6 (Spring MVC, Spring Data JPA)
 - **Build Tool**: Gradle 8+
 - **Database**: H2 (Embedded)
 - **Security**: Spring Security 6.2
@@ -47,7 +47,7 @@ Database connections—giving developers a deeper look into how Spring works und
 
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/garikcareer/company-compass.git](https://github.com/garikcareer/company-compass.git)
+   git clone https://github.com/garikcareer/company-compass.git
    ```
    **Go into the company-compass directory**
    ```bash
@@ -56,13 +56,13 @@ Database connections—giving developers a deeper look into how Spring works und
 
 2. **Build the project**
 
-   Use the Gradle wrapper to ensure the correct version is used.
+   Use the Gradle wrapper to build the project
    ```bash
    ./gradlew clean build
    ```
 
 3. **Run the application**
-   You can run the application using the Gradle's run task.
+   You can run the application using the Gradle's run task
    ```bash
    ./gradlew run
    ```
