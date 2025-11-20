@@ -1,4 +1,4 @@
-package com.example.companycompass.config;
+package com.example.companycompass.config.db;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.flywaydb.core.Flyway;
@@ -15,9 +15,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/**
+ * Configuration class for persistence layer components in the application. This class is annotated
+ * with Spring's configuration-related annotations for enabling features such as transaction management
+ * and JPA repositories. The class also loads database-specific properties and defines several beans
+ * related to database connectivity, JPA, and transaction management.
+ */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.example.companycompass.repository")
+@EnableJpaRepositories("com.example.companycompass.repository")
 @PropertySource("classpath:db-${env:local}.properties")
 @ComponentScan("com.example.companycompass.service")
 public class PersistenceConfig {
@@ -53,6 +59,13 @@ public class PersistenceConfig {
     @Value("${db.password}")
     private String password;
 
+    /**
+     * Configures and initializes a Flyway instance responsible for managing
+     * database versioning and migrations. The method sets up the data source,
+     * specifies the locations of migration scripts, and executes any pending migrations.
+     *
+     * @return a fully configured Flyway instance with migrations applied
+     */
     @Bean
     public Flyway flyway() {
         Flyway flyway = Flyway.configure()
@@ -63,6 +76,13 @@ public class PersistenceConfig {
         return flyway;
     }
 
+    /**
+     * Configures and provides a DataSource bean for interacting with the database.
+     * This method sets up the data source with the specified driver, URL, username,
+     * and password, enabling database connectivity for the application.
+     *
+     * @return a fully configured DataSource instance
+     */
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
@@ -73,6 +93,13 @@ public class PersistenceConfig {
         return ds;
     }
 
+    /**
+     * Configures and provides a LocalContainerEntityManagerFactoryBean for managing JPA persistence.
+     * This method sets up the EntityManagerFactory with the provided DataSource and Flyway instances,
+     * configures the scanning of entity packages, and applies JPA-specific properties.
+     *
+     * @return a fully configured LocalContainerEntityManagerFactoryBean for JPA persistence
+     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Flyway flyway) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();

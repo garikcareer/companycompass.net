@@ -1,28 +1,99 @@
-# spring-gradle-webapp-template
+# CompanyCompass
+
 ## Table of Contents
+
 - [Introduction](#introduction)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [Usage](#usage)
-- [Contributing](#contributing)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Documentation](#documentation)
 
 ## Introduction
-A template with a common repository that will contain configurations to connect to the database. 
-The template provides tests using JUnit5. 
+
+**CompanyCompass** is a web application for managing a directory of companies. It provides a clean interface to list,
+create, update, and delete company profiles.
+
+This project serves as a practical reference for **Standard Spring Framework 6**. Unlike typical Spring Boot apps, it
+demonstrates how to manually configure the core architecture—including the DispatcherServlet, Security chains, and
+Database connections—giving developers a deeper look into how Spring works under the hood.
 
 ## Features
-Configuration tests
-<br>
-Database connection and query commands tests
+
+- **CRUD Operations**: Full Create, Read, Update, and Delete functionality for company profiles.
+- **Custom Styling**: A clean, responsive user interface built with custom CSS (no Bootstrap dependency).
+- **Database Migrations**: Automated schema management using **Flyway**.
+- **Security**: Configured using **Spring Security 6** with manual MVC request matching.
+- **Templating**: Server-side rendering using **Thymeleaf**.
 
 ## Technologies Used
-- **Languages**: Java
-- **Framework**: Spring Framework
-- **Database**: H2
 
-## Usage
-#### Ensure all maven modules are installed and the project is fully indexed before executing.
-#### Use the latest JDK version (JDK 24) for the project.
+- **Language**: Java 21 (LTS)
+- **Framework**: Spring Framework 6.1 (Spring MVC, Spring Data JPA)
+- **Build Tool**: Gradle 8+
+- **Database**: H2 (Embedded)
+- **Security**: Spring Security 6.2
+- **Frontend**: Thymeleaf & Custom CSS
+- **Testing**: JUnit 5 & Spring Test
 
-## Contributing
-For contributing or using the software, please contact me to make a change.
+## Getting Started
+
+### Prerequisites
+
+- **Java 21 SDK** installed.
+- **Gradle** (optional, as the wrapper is included).
+
+### Installation & Running
+
+1. **Clone the repository**
+   ```bash
+   git clone [https://github.com/garikcareer/company-compass.git](https://github.com/garikcareer/company-compass.git)
+   ```
+   **Go into the company-compass directory**
+   ```bash
+   cd company-compass
+   ```
+
+2. **Build the project**
+
+   Use the Gradle wrapper to ensure the correct version is used.
+   ```bash
+   ./gradlew clean build
+   ```
+
+3. **Run the application**
+   You can run the application using the Gradle's run task.
+   ```bash
+   ./gradlew run
+   ```
+
+*Note: If running from IntelliJ IDEA, simply run the ``` CompanyCompassApplication ``` main class.*
+
+4. **Access the App**
+   Open your browser and navigate to: ``` http://localhost:8080 ```
+
+## Project Structure
+
+```text
+The project follows a standard Gradle structure:
+src/main
+├── java/com/example/companycompass
+│ ├── config            # Spring & Security Configurations
+│ ├── controller        # Web Controllers
+│ ├── model             # JPA Entities
+│ ├── repository        # Data Repositories
+│ └── service           # Business Logic
+└── resources
+├── static              # CSS, JS, Images
+├── templates           # Thymeleaf HTML views
+└── db/migration        # Flyway SQL scripts
+```
+
+## Documentation
+
+This project automatically generates standard Javadoc during the build. To view the documentation
+after the build succeeds, open the generated HTML file in your browser:
+
+```bash
+start build/docs/javadoc/index.html
+```

@@ -1,32 +1,32 @@
-<body>
 <div class="container">
     <h2 th:text="${company.id == null} ? 'Add New Company' : 'Edit Company'">Add Company</h2>
 
     <div class="form-wrapper">
+        <div th:if="${isDemoMode}" class="alert-warning" style="font-size: 0.9em; padding: 10px;">
+            <strong>Note:</strong> You cannot add more than 12 companies (This is a demo mode).
+        </div>
+
         <form th:action="@{/save}" th:object="${company}" method="post">
 
-            <input type="hidden" th:field="*{id}" />
+            <!-- Hidden ID for Updates -->
+            <input type="hidden" th:field="*{id}"/>
 
             <div class="form-group">
                 <label for="name" class="form-label">Company Name:</label>
                 <input type="text" class="form-control" id="name" th:field="*{name}"
-                       placeholder="Enter company name" required>
+                       placeholder="Enter company name" required maxlength="50">
             </div>
 
             <div class="form-group">
                 <label for="location" class="form-label">Location:</label>
                 <input type="text" class="form-control" id="location" th:field="*{location}"
-                       placeholder="Enter location" required>
+                       placeholder="Enter location" required maxlength="50">
             </div>
 
-            <div style="margin-top: 20px;">
-                <button type="submit" class="btn btn-primary" style="width: 100%">Save Company</button>
-            </div>
-
-            <div style="margin-top: 10px;">
-                <a href="/" class="btn btn-danger" style="width: 100%">Cancel</a>
+            <div style="margin-top: 30px;">
+                <button type="submit" class="btn btn-blue" style="width: 100%; margin-bottom: 10px;">Submit</button>
+                <a href="/" class="btn btn-red" style="width: 100%">Cancel</a>
             </div>
         </form>
     </div>
 </div>
-</body>

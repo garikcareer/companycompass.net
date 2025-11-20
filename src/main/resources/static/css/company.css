@@ -10,7 +10,9 @@ body {
     background-color: #f4f4f9;
     color: #333;
     line-height: 1.6;
-    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 h1, h2 {
@@ -21,22 +23,21 @@ h1, h2 {
 }
 
 /* --- LAYOUT --- */
-/* Replaces Bootstrap .container */
 .container {
     max-width: 1000px;
-    margin: 0 auto; /* Centers the div */
+    margin: 0 auto;
     padding: 0 20px;
     width: 100%;
+    flex: 1;
 }
 
-/* Centered card for forms */
 .form-wrapper {
     max-width: 500px;
     margin: 0 auto;
     background: white;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* --- TABLES --- */
@@ -45,9 +46,9 @@ h1, h2 {
     border-collapse: collapse;
     background: white;
     margin-top: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    overflow: hidden; /* Rounds the corners of the table */
+    overflow: hidden;
 }
 
 .table-styled thead {
@@ -75,48 +76,55 @@ h1, h2 {
     font-weight: bold;
     border: none;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.1s;
     margin-right: 5px;
     text-align: center;
 }
 
-/* Primary (Blue) - Used for Edit/Submit */
-.btn-primary {
+.btn:active {
+    transform: translateY(1px);
+}
+
+/* Blue button */
+.btn-blue {
     background-color: #3498db;
     color: white;
 }
-.btn-primary:hover {
+
+.btn-blue:hover {
     background-color: #2980b9;
 }
 
-/* Danger (Red) - Used for Delete */
-.btn-danger {
+/* Red button */
+.btn-red {
     background-color: #e74c3c;
     color: white;
 }
-.btn-danger:hover {
+
+.btn-red:hover {
     background-color: #c0392b;
 }
 
-/* Success (Green) - Used for Add New */
-.btn-success {
+/* Green button */
+.btn-green {
     background-color: #27ae60;
     color: white;
 }
-.btn-success:hover {
+
+.btn-green:hover {
     background-color: #219150;
 }
 
-/* Secondary (Grey) - Used for Cancel */
-.btn-secondary {
+/* Grey button */
+.btn-grey {
     background-color: #95a5a6;
     color: white;
 }
-.btn-secondary:hover {
+
+.btn-grey:hover {
     background-color: #7f8c8d;
 }
 
-/* Center button container */
 .action-bar {
     margin-top: 20px;
     text-align: center;
@@ -144,14 +152,16 @@ h1, h2 {
 .form-control:focus {
     border-color: #3498db;
     outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
 }
 
 /* --- NAVIGATION BAR --- */
 .navbar {
     background-color: #2c3e50; /* Dark Blue */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     width: 100%;
+    /* No margin-bottom here to allow full bleed if needed, usually handled by container padding */
+    margin-bottom: 30px;
 }
 
 .navbar-container {
@@ -160,7 +170,7 @@ h1, h2 {
     padding: 0 20px;
     height: 60px;
     display: flex;
-    justify-content: space-between; /* Brand Left, Links Right */
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -176,7 +186,7 @@ h1, h2 {
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 20px; /* Space between links */
+    gap: 20px;
 }
 
 .navbar-links a {
@@ -188,21 +198,44 @@ h1, h2 {
 }
 
 .navbar-links a:hover {
-    color: #3498db; /* Highlight color on hover */
+    color: #3498db;
 }
 
 /* --- FOOTER --- */
 .footer {
-    background-color: #2c3e50; /* Dark Blue */
+    background-color: #2c3e50;
     color: #bdc3c7;
     text-align: center;
     padding: 20px 0;
-    margin-top: 50px;
     width: 100%;
-    position: relative;
-    bottom: 0;
+    margin-top: 30px;
 }
 
 .footer p {
     margin: 0;
+}
+
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+    }
+
+    .navbar-links {
+        margin-top: 15px;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .table-styled {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 }

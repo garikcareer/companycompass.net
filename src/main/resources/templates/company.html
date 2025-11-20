@@ -2,7 +2,12 @@
 <div class="container">
     <h1>Companies List</h1>
 
-    <div th:if="${not #lists.isEmpty(companyList)}">
+    <div th:if="${isDemoMode}" class="alert-warning">
+        <strong>Demo Mode:</strong> To maintain performance, this list is limited to 12 companies per session.
+        Data will reset when you close your browser.
+    </div>
+
+    <div th:if="${not #lists.isEmpty(companies)}">
         <table class="table-styled">
             <thead>
             <tr>
@@ -13,14 +18,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="company : ${companyList}">
+            <tr th:each="company : ${companies}">
                 <td th:text="${company.id}"></td>
                 <td th:text="${company.name}"></td>
                 <td th:text="${company.location}"></td>
                 <td>
-                    <a th:href="@{/edit/{id}(id=${company.id})}" class="btn btn-primary">Edit</a>
+                    <a th:href="@{/edit/{id}(id=${company.id})}" class="btn btn-blue">Edit</a>
                     <a th:href="@{/delete/{id}(id=${company.id})}"
-                       class="btn btn-danger"
+                       class="btn btn-red"
                        onclick="return confirm('Delete this company?');">Delete</a>
                 </td>
             </tr>
@@ -28,12 +33,15 @@
         </table>
     </div>
 
-    <div th:if="${#lists.isEmpty(companyList)}" style="text-align: center; margin-top: 20px;">
-        <p>No companies found.</p>
+    <div th:if="${#lists.isEmpty(companies)}" style="text-align: center; margin-top: 20px;">
+        <p>No companies on a database.</p>
+        <div class="action-bar">
+            <a href="/add" class="btn btn-green">Be first to add a company!</a>
+        </div>
     </div>
 
-    <div class="action-bar">
-        <a href="/add" class="btn btn-success">Add New Company</a>
+    <div th:if="${!#lists.isEmpty(companies)}" class="action-bar">
+        <a href="/add" class="btn btn-green">Add new company</a>
     </div>
 </div>
 </body>
