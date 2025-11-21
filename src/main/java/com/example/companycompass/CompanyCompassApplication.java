@@ -8,16 +8,10 @@ import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.context.annotation.Configuration;
-import org.thymeleaf.spring6.SpringTemplateEngine;
-import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring6.view.ThymeleafViewResolver;
-import org.thymeleaf.templatemode.TemplateMode;
 
 import java.io.File;
 
@@ -72,69 +66,5 @@ public class CompanyCompassApplication implements WebMvcConfigurer {
         tomcat.start();
         logger.info("CompanyCompass Application is started on http://{}:{}", HOST, PORT);
         tomcat.getServer().await();
-    }
-
-    /**
-     * Configures and creates a ThymeleafViewResolver bean for rendering views
-     * based on Thymeleaf templates.
-     *
-     * @param templateEngine the view resolver to use the SpringTemplateEngine instance
-     *                       for processing templates.
-     * @return a ThymeleafViewResolver instance configured with the provided template engine,
-     * character encoding, order, and view name patterns.
-     */
-    @Bean
-    public ThymeleafViewResolver thymeleafViewResolver(SpringTemplateEngine templateEngine) {
-        var resolver = new org.thymeleaf.spring6.view.ThymeleafViewResolver();
-        resolver.setTemplateEngine(templateEngine);
-        resolver.setCharacterEncoding("UTF-8");
-        resolver.setOrder(1);
-        resolver.setViewNames(new String[]{"*"});
-        return resolver;
-    }
-
-    /**
-     * Configures and returns a {@link SpringTemplateEngine} bean for processing Thymeleaf templates.
-     * The {@link SpringTemplateEngine} utilizes the configured {@link SpringResourceTemplateResolver}
-     * to resolve and process template files.
-     *
-     * @return a configured instance of {@link SpringTemplateEngine} for rendering Thymeleaf views.
-     */
-    @Bean
-    public SpringTemplateEngine templateEngine() {
-        SpringTemplateEngine engine = new SpringTemplateEngine();
-        engine.setTemplateResolver(templateResolver());
-        return engine;
-    }
-
-    /**
-     * Configures and returns a {@link SpringResourceTemplateResolver} bean for resolving Thymeleaf template files.
-     * The resolver is responsible for locating and processing template files with the specified prefix, suffix,
-     * template mode, character encoding, and caching settings.
-     *
-     * @return a configured {@link SpringResourceTemplateResolver} instance for resolving Thymeleaf templates.
-     */
-    @Bean
-    public SpringResourceTemplateResolver templateResolver() {
-        SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".html");
-        resolver.setTemplateMode(TemplateMode.HTML);
-        resolver.setCharacterEncoding("UTF-8");
-        resolver.setCacheable(false);
-        return resolver;
-    }
-
-    /**
-     * Adds resource handlers to serve static resources such as CSS, JavaScript, and images
-     * from specific locations.
-     *
-     * @param registry the {@link ResourceHandlerRegistry} used to register resource handlers
-     *                 and specify their resource locations.
-     */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("/static/");
     }
 }

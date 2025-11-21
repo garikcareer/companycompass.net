@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
 
 /**
  * WebConfig is a configuration class that sets up the web application's MVC context,
@@ -36,7 +37,9 @@ public class WebConfig implements WebMvcConfigurer {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
         resolver.setPrefix("classpath:/templates/");
         resolver.setSuffix(".html");
-        resolver.setTemplateMode("HTML");
+        resolver.setTemplateMode(TemplateMode.HTML);
+        resolver.setCharacterEncoding("UTF-8");
+        resolver.setCacheable(false);
         return resolver;
     }
 
@@ -56,17 +59,21 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     /**
-     * Configures and provides a {@link ThymeleafViewResolver} bean used to resolve and render Thymeleaf templates.
-     * The view resolver is configured with a {@link SpringTemplateEngine} for processing templates
-     * and a UTF-8 character encoding to ensure proper handling of internationalized content.
+     * Configures and creates a ThymeleafViewResolver bean for rendering views
+     * based on Thymeleaf templates.
      *
-     * @return an instance of {@link ThymeleafViewResolver} configured with a template engine and UTF-8 encoding.
+     * @param templateEngine the view resolver to use the SpringTemplateEngine instance
+     *                       for processing templates.
+     * @return a ThymeleafViewResolver instance configured with the provided template engine,
+     * character encoding, order, and view name patterns.
      */
     @Bean
-    public ThymeleafViewResolver viewResolver() {
+    public ThymeleafViewResolver viewResolver(SpringTemplateEngine templateEngine) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-        resolver.setTemplateEngine(templateEngine());
+        resolver.setTemplateEngine(templateEngine);
         resolver.setCharacterEncoding("UTF-8");
+        resolver.setOrder(1);
+        resolver.setViewNames(new String[]{"*"});
         return resolver;
     }
 
