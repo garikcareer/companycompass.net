@@ -1,8 +1,8 @@
 package com.example.companycompass;
 
-import com.example.companycompass.config.db.PersistenceConfig;
-import com.example.companycompass.config.WebConfig;
 import com.example.companycompass.config.SecurityConfig;
+import com.example.companycompass.config.WebConfig;
+import com.example.companycompass.config.db.PersistenceConfig;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
@@ -10,61 +10,62 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.context.annotation.Configuration;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.net.URI;
 
 /**
- * The CompanyCompassApplication class is the entry point for the application.
- * It configures and starts an embedded Apache Tomcat server with customized
- * Spring MVC configuration, including resource handling and Thymeleaf template integration.
- * This class implements the {@link WebMvcConfigurer} interface to customize
- * Spring MVC configurations such as resource handler registration.
- * Features:
- * - Starts an embedded Tomcat server configured with a specified host, port,
- * and context path.
- * - Configures the application context with security, persistence, and web configurations.
- * - Sets up Thymeleaf as the view resolver for rendering HTML templates.
- * - Registers static resource handlers to serve static assets.
+ * The entry point for the embedded Tomcat server.
+ * Responsible for bootstrapping the server and loading the Spring Application Context.
  */
-@Configuration
-public class CompanyCompassApplication implements WebMvcConfigurer {
+public class CompanyCompassApplication {
     private static final Logger logger = LoggerFactory.getLogger(CompanyCompassApplication.class);
-    private static final String HOST = "localhost";
     private static final int PORT = 8080;
-    private static final String WEBAPP_DIR = ".";
-    private static final String CATALINA_BASE = "build/tomcat";
-    private static final String CONTEXT_PATH = "";
 
-    /**
-     * The main method initializes and starts the embedded Tomcat server for the application.
-     * It sets up server configurations, web application settings, and integrates the Spring
-     * application context with a DispatcherServlet for handling incoming requests.
-     *
-     * @param args command-line arguments passed to the program.
-     * @throws LifecycleException if an error occurs during the lifecycle of the Tomcat server.
-     */
     public static void main(String[] args) throws LifecycleException {
         Tomcat tomcat = new Tomcat();
-        tomcat.setBaseDir(CATALINA_BASE);
-        tomcat.setHostname(HOST);
         tomcat.setPort(PORT);
-        tomcat.getHost().setAppBase(".");
         tomcat.getConnector();
 
-        System.setProperty("catalina.base", CATALINA_BASE);
-        Context context = tomcat.addWebapp(CONTEXT_PATH, new File(WEBAPP_DIR).getAbsolutePath());
+        String contextPath = System.getenv("APP_CONTEXT_PATH");
+
+        if (contextPath == null || contextPath.isEmpty()) {
+            contextPath = "";
+        }
+
+        String appUrl = "http://localhost:" + PORT + contextPath;
+
+        if (contextPath.isEmpty()) {
+            logger.info("--- RUNNING LOCALLY: {} ---", appUrl);
+        } else {
+            logger.info("--- RUNNING IN PORTFOLIO: App will be at path '{}' ---", contextPath);
+        }
+
+        File docBase = new File("src/main/webapp");
+        if (!docBase.exists()) {
+            docBase = new File(".");
+        }
+
+        Context context = tomcat.addWebapp(contextPath, docBase.getAbsolutePath());
 
         AnnotationConfigWebApplicationContext springContext = new AnnotationConfigWebApplicationContext();
         springContext.register(SecurityConfig.class, PersistenceConfig.class, WebConfig.class);
-
         DispatcherServlet dispatcherServlet = new DispatcherServlet(springContext);
         Tomcat.addServlet(context, "dispatcherServlet", dispatcherServlet);
         context.addServletMappingDecoded("/*", "dispatcherServlet");
 
         tomcat.start();
-        logger.info("CompanyCompass Application is started on http://{}:{}", HOST, PORT);
+
+        try {
+            if (contextPath.isEmpty()) {
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop.getDesktop().browse(new URI(appUrl));
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Failed to open browser", e);
+        }
         tomcat.getServer().await();
     }
 }

@@ -8,12 +8,14 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+@Configuration
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     private static final Logger logger = LoggerFactory.getLogger(AppInitializer.class);
 
