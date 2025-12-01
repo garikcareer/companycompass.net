@@ -29,18 +29,11 @@ public class CompanyCompassApplication {
         tomcat.getConnector();
 
         String contextPath = System.getenv("APP_CONTEXT_PATH");
-
         if (contextPath == null || contextPath.isEmpty()) {
             contextPath = "";
         }
-
         String appUrl = "http://localhost:" + PORT + contextPath;
-
-        if (contextPath.isEmpty()) {
-            logger.info("--- RUNNING LOCALLY: {} ---", appUrl);
-        } else {
-            logger.info("--- RUNNING IN PORTFOLIO: App will be at path '{}' ---", contextPath);
-        }
+        logger.info("APP CONTEXT PATH: '{}'", appUrl);
 
         File docBase = new File("src/main/webapp");
         if (!docBase.exists()) {
