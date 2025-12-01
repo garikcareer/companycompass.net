@@ -1,36 +1,14 @@
+services:
+  company-compass:
+    build: .
+    container_name: company-compass
+    restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=demo
+      - APP_CONTEXT_PATH=
+    networks:
+      - global_tunnel_network
 
-
-### Phase 3: Configure the Gateway (Portfolio)
-
-  These files go into your **Portfolio** folder (`~/Projects/garikcareer.com`).
-  
-  #### 1. Docker Compose (Gateway)
-  This runs Nginx and Cloudflared.
-  
-  
-  http://googleusercontent.com/immersive_entry_chip/3
-  
-  #### 2. Cloudflare Config (`config.yml`)
-  Point everything to Nginx.
-  
-  
-  http://googleusercontent.com/immersive_entry_chip/4
-  
-  #### 3. Nginx Config (`nginx/conf.d/default.conf`)
-  This is where the magic happens. Nginx checks the domain name and routes to the correct container.
-  
-  
-  http://googleusercontent.com/immersive_entry_chip/5
-  
-  **Deploy this part:**
-  ```bash
-  cd ~/Projects/garikcareer.com
-  docker compose up -d --build
-  
-  ### Summary of what happens
-  1.  User types `companycompass.net`.
-  2.  Cloudflare sends request to `nginx` container.
-  3.  Nginx sees `server_name companycompass.net`.
-  4.  Nginx proxies request to `http://company-compass:8080`.
-  5.  Docker resolves `company-compass` on the `global_tunnel_network`.
-  6.  Your Java app receives request at `/` and serves the site.
+networks:
+  global_tunnel_network:
+    external: true
