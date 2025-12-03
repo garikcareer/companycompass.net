@@ -1,4 +1,4 @@
-package com.example.companycompass.config;
+package net.companycompass.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,7 +23,7 @@ import org.thymeleaf.templatemode.TemplateMode;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.example.companycompass.controller")
+@ComponentScan("net.companycompass.controller")
 public class WebConfig implements WebMvcConfigurer {
     /**
      * Configures and provides a {@link SpringResourceTemplateResolver} bean for resolving Thymeleaf templates.

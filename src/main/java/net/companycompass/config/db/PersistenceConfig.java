@@ -1,4 +1,4 @@
-package com.example.companycompass.config.db;
+package net.companycompass.config.db;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.flywaydb.core.Flyway;
@@ -23,9 +23,9 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("com.example.companycompass.repository")
+@EnableJpaRepositories("net.companycompass.repository")
 @PropertySource("classpath:db-${env:local}.properties")
-@ComponentScan("com.example.companycompass.service")
+@ComponentScan("net.companycompass.service")
 public class PersistenceConfig {
     /**
      * The name of the database driver class to be used for establishing a database connection.
@@ -104,7 +104,7 @@ public class PersistenceConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Flyway flyway) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.example.companycompass.model");
+        em.setPackagesToScan("net.companycompass.model");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties properties = new Properties();

@@ -7,7 +7,7 @@ group = PROJECT_GROUP
 version = PROJECT_VERSION
 
 application {
-    mainClass = 'com.example.companycompass.CompanyCompassApplication'
+    mainClass = 'net.companycompass.CompanyCompassApplication'
 }
 
 java {
@@ -51,7 +51,7 @@ dependencies {
 // TASKS
 jar {
     manifest {
-        attributes 'Main-Class': 'com.example.companycompass.CompanyCompassApplication'
+        attributes 'Main-Class': 'net.companycompass.CompanyCompassApplication'
     }
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }

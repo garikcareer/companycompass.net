@@ -1,6 +1,5 @@
-package com.example.companycompass.config;
+package net.companycompass.config;
 
-import org.apache.catalina.util.Introspection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

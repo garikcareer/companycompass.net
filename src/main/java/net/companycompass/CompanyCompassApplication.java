@@ -1,8 +1,8 @@
-package com.example.companycompass;
+package net.companycompass;
 
-import com.example.companycompass.config.SecurityConfig;
-import com.example.companycompass.config.WebConfig;
-import com.example.companycompass.config.db.PersistenceConfig;
+import net.companycompass.config.SecurityConfig;
+import net.companycompass.config.WebConfig;
+import net.companycompass.config.db.PersistenceConfig;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;

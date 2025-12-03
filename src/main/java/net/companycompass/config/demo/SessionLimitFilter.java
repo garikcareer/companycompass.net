@@ -1,4 +1,4 @@
-package com.example.companycompass.config.demo;
+package net.companycompass.config.demo;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

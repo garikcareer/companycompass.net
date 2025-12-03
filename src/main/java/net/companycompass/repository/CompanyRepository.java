@@ -1,6 +1,6 @@
-package com.example.companycompass.repository;
+package net.companycompass.repository;
 
-import com.example.companycompass.model.Company;
+import net.companycompass.model.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

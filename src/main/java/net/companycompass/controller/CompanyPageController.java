@@ -1,7 +1,7 @@
-package com.example.companycompass.controller;
+package net.companycompass.controller;
 
-import com.example.companycompass.model.Company;
-import com.example.companycompass.service.CompanyService;
+import net.companycompass.model.Company;
+import net.companycompass.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;

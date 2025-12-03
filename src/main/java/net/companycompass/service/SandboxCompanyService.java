@@ -1,6 +1,6 @@
-package com.example.companycompass.service;
+package net.companycompass.service;
 
-import com.example.companycompass.model.Company;
+import net.companycompass.model.Company;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;

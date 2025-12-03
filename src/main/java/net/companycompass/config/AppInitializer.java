@@ -1,8 +1,8 @@
-package com.example.companycompass.config;
+package net.companycompass.config;
 
-import com.example.companycompass.config.db.PersistenceConfig;
-import com.example.companycompass.config.demo.SessionCountListener;
-import com.example.companycompass.config.demo.SessionLimitFilter;
+import net.companycompass.config.db.PersistenceConfig;
+import net.companycompass.config.demo.SessionCountListener;
+import net.companycompass.config.demo.SessionLimitFilter;
 import jakarta.servlet.FilterRegistration;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;

@@ -1,4 +1,4 @@
-package com.example.companycompass.model;
+package net.companycompass.model;
 
 import jakarta.persistence.*;
 
