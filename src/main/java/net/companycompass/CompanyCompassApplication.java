@@ -25,6 +25,7 @@ public class CompanyCompassApplication {
 
     public static void main(String[] args) throws LifecycleException {
         Tomcat tomcat = new Tomcat();
+        tomcat.setBaseDir(System.getProperty("java.io.tmpdir") + File.separator + "tomcat." + PORT);
         tomcat.setPort(PORT);
         tomcat.getConnector();
 

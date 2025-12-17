@@ -5,8 +5,9 @@
 - [Introduction](#introduction)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Screenshots](#screenshots)
 - [Documentation](#documentation)
 
 ## Introduction
@@ -35,6 +36,23 @@ Database connections—giving developers a deeper look into how Spring works und
 - **Security**: Spring Security 6.2
 - **Frontend**: Thymeleaf & Custom CSS
 - **Testing**: JUnit 5 & Spring Test
+
+## Project Structure
+
+```text
+The project follows a standard Gradle structure:
+src/main
+├── java/com/example/companycompass
+│ ├── config            # Spring & Security Configurations
+│ ├── controller        # Web Controllers
+│ ├── model             # JPA Entities
+│ ├── repository        # Data Repositories
+│ └── service           # Business Logic
+└── resources
+├── static              # CSS, JS, Images
+├── templates           # Thymeleaf HTML views
+└── db/migration        # Flyway SQL scripts
+```
 
 ## Getting Started
 
@@ -72,22 +90,11 @@ Database connections—giving developers a deeper look into how Spring works und
 4. **Access the App**
    Open your browser and navigate to: ``` http://localhost:8080 ```
 
-## Project Structure
-
-```text
-The project follows a standard Gradle structure:
-src/main
-├── java/com/example/companycompass
-│ ├── config            # Spring & Security Configurations
-│ ├── controller        # Web Controllers
-│ ├── model             # JPA Entities
-│ ├── repository        # Data Repositories
-│ └── service           # Business Logic
-└── resources
-├── static              # CSS, JS, Images
-├── templates           # Thymeleaf HTML views
-└── db/migration        # Flyway SQL scripts
-```
+## Screenshots
+### CompanyCompass Homepage
+![Alt text](.github/screenshots/CompanyCompass_Homepage.png "CompanyCompass Homepage")
+### CompanyCompass View Companies Page
+![Alt text](.github/screenshots/CompanyCompass_Add.png "CompanyCompass Add Company Page")
 
 ## Documentation
 
